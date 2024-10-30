@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,6 +22,7 @@ namespace lab_2_2
         {
             hours = p_hours;
             minutes = p_minutes;
+            Check();
         }
 
         private byte hours;
@@ -39,16 +41,23 @@ namespace lab_2_2
                 hours += cnt;
             }
         }
-        private void CheckZero()
+        private bool CheckZero()
         {
             if (minutes == 0)
             {
                 if (hours == 0)
                 {
-
+                    Console.WriteLine("Время не может уйти в минус");
+                    return true;
                 }
-
+                else
+                {
+                    hours -= 1;
+                    minutes += 60;
+                    return false;
+                }
             }
+            else return false;
         }
         public void Print()
         {
@@ -80,10 +89,28 @@ namespace lab_2_2
         public static Time operator --(Time p_time)
         {
             var t = p_time;
-            t.minutes -= 1;
-            t.Check();
+            if(!t.CheckZero())
+            {
+                t.minutes -= 1;
+            }
             return t;
         }
-
+        public static explicit operator byte(Time p_time)
+        {
+            return p_time.hours;
+        }
+        public static implicit operator bool(Time p_time)
+        {
+            if (p_time.hours == 0 && p_time.minutes == 0) return true;
+            else return false;
+        }
+        public static Time operator +(Time p_time1, Time p_time2)
+        {
+            return 
+        }
+        public static Time operator -(Time p_time1, Time p_time2)
+        {
+            return
+        }
     }
 }
