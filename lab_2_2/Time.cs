@@ -12,17 +12,19 @@ namespace lab_2_2
     {
         public Time() { }
 
-        public Time(byte p_minutes) 
-        {
-            minutes = p_minutes;
-            Check();
-        }
-
-        public Time(byte p_hours, byte p_minutes)
+        public Time(byte p_hours, uint p_minutes)
         {
             hours = p_hours;
-            minutes = p_minutes;
-            Check();
+            if (p_minutes >= 60)
+            {
+                while (p_minutes >= 60)
+                {
+                    p_minutes -= 60;
+                    hours++;
+                }
+                minutes = (byte)p_minutes;
+            }
+            else minutes = (byte)p_minutes;          
         }
 
         private byte hours;
@@ -104,13 +106,89 @@ namespace lab_2_2
             if (p_time.hours == 0 && p_time.minutes == 0) return true;
             else return false;
         }
-        public static Time operator +(Time p_time1, Time p_time2)
+        public static Time operator +(Time p_time, uint p_minutes)
         {
-            return 
+            if (p_minutes >= 60)
+            {
+                while (p_minutes >= 60)
+                {
+                    p_minutes -= 60;
+                    p_time.hours++;
+                }
+                p_time.minutes += (byte)p_minutes;
+                if(p_time.minutes >= 60)
+                {
+                    p_time.minutes -= 60;
+                    p_time.hours++;
+                }
+                return p_time;
+            }
+            else
+            {
+                p_time.minutes += (byte)p_minutes;
+                if (p_time.minutes >= 60)
+                {
+                    p_time.minutes -= 60;
+                    p_time.hours++;
+                }
+                return p_time;
+            }
         }
-        public static Time operator -(Time p_time1, Time p_time2)
+        public static Time operator +(uint p_minutes, Time p_time)
         {
-            return
+            if (p_minutes >= 60)
+            {
+                while (p_minutes >= 60)
+                {
+                    p_minutes -= 60;
+                    p_time.hours++;
+                }
+                p_time.minutes += (byte)p_minutes;
+                if (p_time.minutes >= 60)
+                {
+                    p_time.minutes -= 60;
+                    p_time.hours++;
+                }
+                return p_time;
+            }
+            else
+            {
+                p_time.minutes += (byte)p_minutes;
+                if (p_time.minutes >= 60)
+                {
+                    p_time.minutes -= 60;
+                    p_time.hours++;
+                }
+                return p_time;
+            }
         }
+        //public static Time operator -(Time p_time, uint p_minutes)
+        //{
+        //    if (p_minutes >= 60)
+        //    {
+        //        while (p_minutes >= 60)
+        //        {
+        //            p_minutes -= 60;
+        //            p_time.hours--;
+        //        }
+        //        p_time.minutes -= (byte)p_minutes;
+        //        if (p_time.minutes >= 60)
+        //        {
+        //            p_time.minutes -= 60;
+        //            p_time.hours--;
+        //        }
+        //        return p_time;
+        //    }
+        //    else
+        //    {
+        //        p_time.minutes += (byte)p_minutes;
+        //        if (p_time.minutes >= 60)
+        //        {
+        //            p_time.minutes -= 60;
+        //            p_time.hours++;
+        //        }
+        //        return p_time;
+        //    }
+        //}
     }
 }
