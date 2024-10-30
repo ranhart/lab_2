@@ -69,17 +69,25 @@ namespace lab_2_2
         {
             if (num >= 60)
             {
-                byte cnt = 0;
                 uint x = num; 
                 while (x>= 60)
                 {
                     x -= 60;
-                    cnt++;
+                    hours++;
                 }
-                hours += cnt;
                 minutes += (byte)x;
+                return this;
             }
-            return this;
+            else
+            {
+                minutes += (byte)num;
+                if (minutes >= 60)
+                {
+                    minutes -= 60;
+                    hours++;
+                }
+                return this;
+            }
         }
         public static Time operator ++(Time p_time)
         {
@@ -162,33 +170,6 @@ namespace lab_2_2
                 return p_time;
             }
         }
-        //public static Time operator -(Time p_time, uint p_minutes)
-        //{
-        //    if (p_minutes >= 60)
-        //    {
-        //        while (p_minutes >= 60)
-        //        {
-        //            p_minutes -= 60;
-        //            p_time.hours--;
-        //        }
-        //        p_time.minutes -= (byte)p_minutes;
-        //        if (p_time.minutes >= 60)
-        //        {
-        //            p_time.minutes -= 60;
-        //            p_time.hours--;
-        //        }
-        //        return p_time;
-        //    }
-        //    else
-        //    {
-        //        p_time.minutes += (byte)p_minutes;
-        //        if (p_time.minutes >= 60)
-        //        {
-        //            p_time.minutes -= 60;
-        //            p_time.hours++;
-        //        }
-        //        return p_time;
-        //    }
-        //}
+
     }
 }
