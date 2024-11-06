@@ -25,7 +25,7 @@ namespace lab_2_1
             Skill = p_skill;
         }
 
-        public string Skill;
+        protected string Skill;
 
         public void SetSkill(string p_skill)
         {

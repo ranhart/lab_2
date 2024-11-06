@@ -23,7 +23,7 @@ namespace lab_2_1
             Name = prevPerson.Name;
         }
 
-        public string Name;
+        protected string Name;
 
         public void PrintName()
         {
