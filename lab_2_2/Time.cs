@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices.Marshalling;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,13 +35,11 @@ namespace lab_2_2
         {
             if (minutes >= 60)
             {
-                byte cnt = 0;
                 while (minutes >= 60)
                 {
                     minutes -= 60;
-                    cnt++;
+                    hours++;
                 }
-                hours += cnt;
             }
         }
         private bool CheckZero()
@@ -49,7 +48,6 @@ namespace lab_2_2
             {
                 if (hours == 0)
                 {
-                    Console.WriteLine("Время не может уйти в минус");
                     return true;
                 }
                 else
@@ -69,41 +67,35 @@ namespace lab_2_2
         {
             if (num >= 60)
             {
-                uint x = num; 
-                while (x>= 60)
+                while (num>= 60)
                 {
-                    x -= 60;
+                    num -= 60;
                     hours++;
                 }
-                minutes += (byte)x;
+                minutes += (byte)num;
+                if (minutes >= 60) Check();
                 return this;
             }
             else
             {
                 minutes += (byte)num;
-                if (minutes >= 60)
-                {
-                    minutes -= 60;
-                    hours++;
-                }
+                if (minutes >= 60) Check();
                 return this;
             }
         }
         public static Time operator ++(Time p_time)
         {
-            var t = p_time;
-            t.minutes += 1;
-            t.Check();
-            return t;
+            p_time.minutes += 1;
+            p_time.Check();
+            return p_time;
         }
         public static Time operator --(Time p_time)
-        {
-            var t = p_time;
-            if(!t.CheckZero())
+        { 
+            if(!p_time.CheckZero())
             {
-                t.minutes -= 1;
+                p_time.minutes -= 1;
             }
-            return t;
+            return p_time;
         }
         public static explicit operator byte(Time p_time)
         {
@@ -111,8 +103,8 @@ namespace lab_2_2
         }
         public static implicit operator bool(Time p_time)
         {
-            if (p_time.hours == 0 && p_time.minutes == 0) return true;
-            else return false;
+            if (p_time.hours == 0 && p_time.minutes == 0) return false;
+            else return true;
         }
         public static Time operator +(Time p_time, uint p_minutes)
         {
@@ -165,11 +157,32 @@ namespace lab_2_2
                 if (p_time.minutes >= 60)
                 {
                     p_time.minutes -= 60;
-                    p_time.hours++;
+                    p_time.Check();
                 }
                 return p_time;
             }
         }
-
+        public static Time operator -(Time p_time, uint p_minutes)
+        {
+            if ((uint)p_time.hours * 60 + (uint)p_time.minutes > p_minutes)
+            {
+                uint total_time = (uint)p_time.hours * 60 + (uint)p_time.minutes - p_minutes;
+                p_time.hours = 0;
+                while (total_time >= 60)
+                {
+                    total_time -= 60;
+                    p_time.hours++;
+                }
+                p_time.minutes = (byte)total_time;
+                return p_time;
+            }
+            else
+            {
+                p_time.hours = 0;
+                p_time.minutes = 0;
+                return p_time;
+            }
+            
+        }
     }
 }

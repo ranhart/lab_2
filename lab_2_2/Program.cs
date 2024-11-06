@@ -20,10 +20,10 @@
                         time = time.Add(minutes2);
                         Console.WriteLine("Тест метода Add: ");
                         time.Print();
-                        time = time--;
                         Console.WriteLine("Тест унарных операторов: ");
-                        time.Print();
                         time = time++;
+                        time.Print();
+                        time = time--;
                         time.Print();
                         Console.WriteLine("Тест явных и неявных пробразований: ");
                         Console.WriteLine((byte)time);
@@ -34,7 +34,20 @@
                         if (uint.TryParse(m3, out uint minutes3))
                         {
                             time = time + minutes3;
-                            Console.WriteLine("Тест бинарных операторов: ");
+                            Console.WriteLine("Тест бинарного оператора +: ");
+                            time.Print();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Ошибка ввода");
+                            return;
+                        }
+                        Console.WriteLine("Введите сколько минут вычесть: ");
+                        string m4 = Console.ReadLine();
+                        if (uint.TryParse(m4, out uint minutes4))
+                        {
+                            time = time - minutes4;
+                            Console.WriteLine("Тест бинарного оператора -: ");
                             time.Print();
                         }
                         else

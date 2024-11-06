@@ -13,7 +13,7 @@
             Person person1 = new Person(x); //Конструктор 2
             person1.PrintName();
             Console.WriteLine("Тест конструктора копирования:");
-            Person person2 = new Person(person); //Конструктор копирования
+            Person person2 = new Person(person1); //Конструктор копирования
             person2.PrintName();
             Console.WriteLine("Тест метода SetName:");
             Console.WriteLine("Введите имя: ");
@@ -25,8 +25,7 @@
             string str = person3.Merge(); 
             Console.WriteLine(str);
             Console.WriteLine("Тест перегрузки ToString():");
-            Console.WriteLine(person.ToString());
-            Console.WriteLine("Тест конструктора дочернего класса:");
+            Console.WriteLine(person1.ToString());
             Musician musician = new Musician("Саша", "гитара"); //Конструктор дочернего класса
             Console.WriteLine("Тест методов дочернего класса:");
             musician.PrintName();

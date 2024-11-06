@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace lab_2_1
 {
-    internal class Musician : Person 
+    internal class Musician : Person                //Если от класса Person наследуется Musician, то значит что человек умеет играть на определенном музыкальном инструменте
     {
         public Musician() { }
         public Musician(string p_name)

@@ -34,7 +34,7 @@ namespace lab_2_1
         {
             return Name.Substring(0, 1) + Name.Substring(Name.Length - 1);
         }
-        public string ToString()
+        public override string ToString()
         {
             return Name;
         }
