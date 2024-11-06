@@ -10,7 +10,10 @@ namespace lab_2_1
 {
     internal class Person : Random
     {
-        public Person() { }
+        public Person() 
+        {
+            Name = " ";        
+        }
         public Person(string p_name)
         {
             Name = p_name;

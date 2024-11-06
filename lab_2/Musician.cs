@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace lab_2_1
 {
     internal class Musician : Person                //Если от класса Person наследуется Musician, то значит что человек умеет играть на определенном музыкальном инструменте
     {
-        public Musician() { }
+        public Musician() 
+        {
+            Name = " ";
+            Skill = " ";
+        }
         public Musician(string p_name)
         {
             Name = p_name;
+            Skill = " ";
         }
         public Musician(string p_name, string p_skill)
         {
@@ -40,6 +46,7 @@ namespace lab_2_1
             {
                 Console.Write(Notes[random.Next(0, 12)] + " ");
             }
+            Console.WriteLine();
         }
     }
 }
